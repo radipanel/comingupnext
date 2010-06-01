@@ -165,66 +165,23 @@
 			
 			</div>
 
-			<div class="content" align="center" style="border-bottom: 1px #eee solid;">
-			
-				<strong>Now Playing:</strong> 
-			
-					<?php
-
-					?>
-				
-		
-			</div>
-
 			<div class="content">
 
-				<?php
-					
-					if( $_GET['cat'] ) {
-						
-						$cat = " WHERE category = '" . $core->clean( $_GET['cat'] ) . "'";
-						
-					}
-					
-					$query = $db->query( "SELECT * FROM news{$cat} ORDER BY stamp DESC" );
-					$num   = $db->num( $query );
-					
-					while( $array = $db->assoc( $query ) ) {
-					
-						$time = date( "jS F Y", $array['stamp'] );
-					
-				?>
-				
-				<strong><?php echo $time; ?></strong>
-				&raquo; 
-				<a href="news/<?php echo $array['id']; ?>"><?php echo $array['title']; ?></a>
-				
-				<?php
-					
-					}
-				
-					if( $num == 0 ) {
-				
-				?>
-				
-				<div class="bad" style="margin-bottom: 0px;">
-				
-					<strong>Sorry</strong>
-					<br />
-					There aren't any news items in this category!
-				
-				</div>
-				
-				<?php
-				
-					}
-				
-				?>
+				<p><strong>Now Playing:</strong> 
+					<?php 
+						echo $now_query_array['dj'];
+					?>
+				</p>
+
+				<p><strong>Coming Up Next:</strong> 
+					<?php 
+						echo $next_query_array['dj'];
+					?>
+				</p>
 
 			</div>
 
 		</div>
 
 	</body>
-
 </html>
