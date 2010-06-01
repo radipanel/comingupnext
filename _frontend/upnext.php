@@ -185,7 +185,11 @@
 						else {
 	
 							// Now we give them the bad news, someone is online :(
-							echo $now_query_array['dj'];
+							// So now to find out who they are
+							
+							$who_are_they_now = $db->query( "SELECT username FROM users WHERE id='{$now_query_array['dj']}'" );
+							$who_are_they_now = mysql_result( $who_are_they_now, "username");
+							echo "DJ " . $who_are_they_now;
 						
 						}
 					?>
@@ -200,9 +204,12 @@
 
 						}
 						else {
-	
+							
 							// Now we give them the bad news, someone is online :(
-							echo $now_query_array['dj'];
+							// So now to find out who they are
+							$who_are_they_next = $db->query( "SELECT username FROM users WHERE id='{$next_query_array['dj']}'" );
+							$who_are_they_next = mysql_result( $who_are_they_next, "username");
+							echo "DJ " . $who_are_they_next;
 						
 						}
 					?>
