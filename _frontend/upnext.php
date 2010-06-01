@@ -3,7 +3,7 @@
 	require_once( "../_inc/glob.php" );
 
 	// Grab today's date using PHP date()
-	$today_date = date( 'l' );
+	$today_date = date( 'j' );
 
 	// Grab the current hour
 	$now_hour = date( 'H' );
