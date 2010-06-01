@@ -1,15 +1,21 @@
 <?php
-	
+	// Include the required glob.php file
 	require_once( "../_inc/glob.php" );
 
+	// Grab today's date using PHP date()
 	$today_date = date( 'l' );
 
+	// Grab the current hour
 	$now_hour = date( 'h' );
+	// Now we have the current hour, we add one to get the next hour
 	$next_hour = $now_hour + 1;
 
+	// Now we find out who's currently on ;)
 	$now_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$now_hour}" );
+	// And who's next!
 	$next_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$next_hour}" );
-						
+	
+	// Now create an array of the data, both now and next
 	$now_query_array = $db->assoc( $now_query );
 	$next_query_array = $db->assoc( $next_query );
 ?>
@@ -168,14 +174,37 @@
 			<div class="content">
 
 				<p><strong>Now Playing:</strong> 
-					<?php 
-						echo $now_query_array['dj'];
+					<?php
+						// Now we find out if someone is currently on
+						if ( $now_query_array['dj'] == "" ) {
+							
+							// There wasn't, so we tell the user
+							echo "No DJ has been scheduled!";
+
+						}
+						else {
+	
+							// Now we give them the bad news, someone is online :(
+							echo $now_query_array['dj'];
+						
+						}
 					?>
 				</p>
 
 				<p><strong>Coming Up Next:</strong> 
-					<?php 
-						echo $next_query_array['dj'];
+					<?php
+						if ( $next_query_array['dj'] == "" ) {
+
+							// There wasn't, so we tell the user
+							echo "No DJ has been scheduled!";
+
+						}
+						else {
+	
+							// Now we give them the bad news, someone is online :(
+							echo $now_query_array['dj'];
+						
+						}
 					?>
 				</p>
 
