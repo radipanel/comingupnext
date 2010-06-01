@@ -6,14 +6,14 @@
 	$today_date = date( 'l' );
 
 	// Grab the current hour
-	$now_hour = date( 'h' );
+	$now_hour = date( 'H' );
 	// Now we have the current hour, we add one to get the next hour
 	$next_hour = $now_hour + 1;
 
 	// Now we find out who's currently on ;)
-	$now_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$now_hour}" );
+	$now_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$now_hour}'" );
 	// And who's next!
-	$next_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$next_hour}" );
+	$next_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$next_hour}'" );
 	
 	// Now create an array of the data, both now and next
 	$now_query_array = $db->assoc( $now_query );
