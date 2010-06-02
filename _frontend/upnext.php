@@ -179,7 +179,7 @@
 						if ( $now_query_array['dj'] == "" ) {
 							
 							// There wasn't, so we tell the user
-							echo "No DJ has been scheduled!";
+							echo "No DJ has been scheduled for " . $now_hour . ":00";
 
 						}
 						else {
@@ -190,6 +190,7 @@
 							$who_are_they_now = $db->query( "SELECT username FROM users WHERE id='{$now_query_array['dj']}'" );
 							$who_are_they_now = mysql_result( $who_are_they_now, "username");
 							echo "DJ " . $who_are_they_now;
+							echo " (" . $now_hour . ":00)";
 						
 						}
 					?>
@@ -200,8 +201,7 @@
 						if ( $next_query_array['dj'] == "" ) {
 
 							// There wasn't, so we tell the user
-							echo "No DJ has been scheduled!";
-
+							echo "No DJ has been scheduled for " . $now_hour . ":00";
 						}
 						else {
 							
@@ -210,6 +210,7 @@
 							$who_are_they_next = $db->query( "SELECT username FROM users WHERE id='{$next_query_array['dj']}'" );
 							$who_are_they_next = mysql_result( $who_are_they_next, "username");
 							echo "DJ " . $who_are_they_next;
+							echo " (" . $next_hour . ":00)";
 						
 						}
 					?>
