@@ -201,7 +201,7 @@
 						if ( $next_query_array['dj'] == "" ) {
 
 							// There wasn't, so we tell the user
-							echo "No DJ has been scheduled for " . $now_hour . ":00";
+							echo "No DJ has been scheduled for " . $next_hour . ":00";
 						}
 						else {
 							
