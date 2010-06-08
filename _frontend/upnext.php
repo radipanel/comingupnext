@@ -3,10 +3,11 @@
 	require_once( "../_inc/glob.php" );
 
 	// Grab today's date using PHP date()
-	$today_date = date( 'j' );
+	$today_date = date( 'N' );
 
 	// Grab the current hour
 	$now_hour = date( 'H' );
+
 	// Now we have the current hour, we add one to get the next hour
 	$next_hour = $now_hour + 1;
 
@@ -18,6 +19,39 @@
 	// Now create an array of the data, both now and next
 	$now_query_array = $db->assoc( $now_query );
 	$next_query_array = $db->assoc( $next_query );
+
+	// Now to make the hours friendly
+	if( $now_hour < 10 ) {
+
+		$now_hour = "{$now_hour}:00";
+	
+	}
+	elseif( $now_hour == 24 ) {
+							
+		$now_hour = "00:00";
+							
+	}
+	else {
+
+		$now_hour = "{$now_hour}:00";
+
+	}
+
+	if( $next_hour < 10 ) {
+
+		$next_hour = "{$next_hour}:00";
+
+	}
+	elseif( $next_hour == 24 ) {
+							
+		$next_hour = "00:00";
+							
+	}
+	else {
+
+		$next_hour = "{$next_hour}:00";
+
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -179,7 +213,7 @@
 						if ( $now_query_array['dj'] == "" ) {
 							
 							// There wasn't, so we tell the user
-							echo "No DJ has been scheduled for " . $now_hour . ":00";
+							echo "No DJ has been scheduled for " . $now_hour . "";
 
 						}
 						else {
@@ -190,7 +224,7 @@
 							$who_are_they_now = $db->query( "SELECT username FROM users WHERE id='{$now_query_array['dj']}'" );
 							$who_are_they_now = mysql_result( $who_are_they_now, "username");
 							echo "DJ " . $who_are_they_now;
-							echo " (" . $now_hour . ":00)";
+							echo " (" . $now_hour . ")";
 						
 						}
 					?>
@@ -201,7 +235,7 @@
 						if ( $next_query_array['dj'] == "" ) {
 
 							// There wasn't, so we tell the user
-							echo "No DJ has been scheduled for " . $next_hour . ":00";
+							echo "No DJ has been scheduled for " . $next_hour . "";
 						}
 						else {
 							
@@ -210,7 +244,7 @@
 							$who_are_they_next = $db->query( "SELECT username FROM users WHERE id='{$next_query_array['dj']}'" );
 							$who_are_they_next = mysql_result( $who_are_they_next, "username");
 							echo "DJ " . $who_are_they_next;
-							echo " (" . $next_hour . ":00)";
+							echo " (" . $next_hour . ")";
 						
 						}
 					?>
