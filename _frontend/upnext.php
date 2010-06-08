@@ -11,10 +11,21 @@
 	// Now we have the current hour, we add one to get the next hour
 	$next_hour = $now_hour + 1;
 
+	if ( $next_hour == "24" ) {
+
+		// It's midnight on the next day
+		$next_date = $today_date + 1;
+	}
+	else {
+		
+		// We don't need to worry
+		$next_date = $today_date;
+	}
+
 	// Now we find out who's currently on ;)
 	$now_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$now_hour}'" );
 	// And who's next!
-	$next_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$next_hour}'" );
+	$next_query = $db->query( "SELECT * FROM timetable WHERE day = '{$next_date}' AND time = '{$next_hour}'" );
 	
 	// Now create an array of the data, both now and next
 	$now_query_array = $db->assoc( $now_query );
@@ -39,16 +50,19 @@
 
 	if( $next_hour < 10 ) {
 
+		$next_day = $today_date;
 		$next_hour = "{$next_hour}:00";
 
 	}
 	elseif( $next_hour == 24 ) {
 							
+		$next_day = $today_date + 1;		
 		$next_hour = "00:00";
 							
 	}
 	else {
 
+		$next_day = $today_date;
 		$next_hour = "{$next_hour}:00";
 
 	}
