@@ -11,15 +11,11 @@
 	// Now we have the current hour, we add one to get the next hour
 	$next_hour = $now_hour + 1;
 
-	if ( $next_hour == "24" ) {
+	if ( $next_hour == 24 ) {
 
 		// It's midnight on the next day
 		$next_date = $today_date + 1;
-	}
-	else {
-		
-		// We don't need to worry
-		$next_date = $today_date;
+		$next_hour = "0";
 	}
 
 	// Now we find out who's currently on ;)
@@ -32,10 +28,10 @@
 	$next_query_array = $db->assoc( $next_query );
 
 	// Now to make the hours friendly
-	if( $now_hour < 10 ) {
-
-		$now_hour = "{$now_hour}:00";
-	
+	if( $now_hour == 0 ) {
+							
+		$now_hour = "00:00";
+							
 	}
 	elseif( $now_hour == 24 ) {
 							
@@ -48,21 +44,18 @@
 
 	}
 
-	if( $next_hour < 10 ) {
-
-		$next_day = $today_date;
-		$next_hour = "{$next_hour}:00";
-
+	if( $next_hour == 0 ) {
+								
+		$next_hour = "00:00";
+							
 	}
 	elseif( $next_hour == 24 ) {
-							
-		$next_day = $today_date + 1;		
+								
 		$next_hour = "00:00";
 							
 	}
 	else {
 
-		$next_day = $today_date;
 		$next_hour = "{$next_hour}:00";
 
 	}
