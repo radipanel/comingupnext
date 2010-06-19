@@ -229,7 +229,7 @@
 							// So now to find out who they are
 							
 							$who_are_they_now = $db->query( "SELECT username FROM users WHERE id='{$now_query_array['dj']}'" );
-							$who_are_they_now = mysql_result( $who_are_they_now, "username");
+							$who_are_they_now = mysql_result( $who_are_they_now, 0, "username");
 							echo "DJ " . $who_are_they_now;
 							echo " (" . $now_hour . ")";
 						
@@ -249,7 +249,7 @@
 							// Now we give them the bad news, someone is online :(
 							// So now to find out who they are
 							$who_are_they_next = $db->query( "SELECT username FROM users WHERE id='{$next_query_array['dj']}'" );
-							$who_are_they_next = mysql_result( $who_are_they_next, "username");
+							$who_are_they_next = mysql_result( $who_are_they_next, 0, "username");
 							echo "DJ " . $who_are_they_next;
 							echo " (" . $next_hour . ")";
 						
