@@ -17,6 +17,11 @@
 		$next_date = $today_date + 1;
 		$next_hour = "0";
 	}
+	else {
+
+		// It's the same day
+		$next_date = $today_date;
+	}
 
 	// Now we find out who's currently on ;)
 	$now_query = $db->query( "SELECT * FROM timetable WHERE day = '{$today_date}' AND time = '{$now_hour}'" );
